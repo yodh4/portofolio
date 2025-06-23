@@ -1,6 +1,5 @@
 'use client';
 
-import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, FC } from 'react';
 import styles from '../../styles/HomePage.module.css';
@@ -280,13 +279,6 @@ const HomePage: FC = () => {
 
   return (
     <>
-      <Head>
-        <title>{portfolioData.name} - CS Portfolio</title>
-        <meta name="description" content={`${portfolioData.name}'s professional computer science portfolio, built with Next.js and TypeScript.`} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      
       <FloatingShapes />
       
       <div className={styles.pageWrapper}>
