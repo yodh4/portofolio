@@ -9,7 +9,8 @@ interface Project {
   title: string;
   description: string;
   tech: string[];
-  link: string;
+  code: string;
+  demo: string;
 }
 
 interface ExperienceItem {
@@ -23,7 +24,6 @@ interface Contact {
   email: string;
   linkedin: string;
   github: string;
-  portfolio: string;
 }
 
 interface PortfolioData {
@@ -34,59 +34,74 @@ interface PortfolioData {
   experience: ExperienceItem[];
   contact: Contact;
   copyright: string;
+  resume: string;
 }
 
-// --- Data Configuration ---
-// Your portfolio content, now strongly typed
 const portfolioData: PortfolioData = {
-  name: "Cyrilus Yodha M",
+  name: "Cyrilus Yodha Maheswara",
   title: "Computer Science Student",
   introduction: [
-    "Hello! I'm a passionate Computer Science student with a love for , type-safe solutions and building amazing digital experiences. I specialize in full-stack development with a focus on the Next.js and TypeScript ecosystem.",
-    "When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or learning about the latest trends in tech. I believe in the power of clean, well-documented code and user-centered design.",
-    "Currently seeking internship opportunities and excited to collaborate on meaningful projects that make a difference!",
+    `
+    Hello! My name is Cyrilus Yodha and I'm a final year undergraduate student at 
+    Universitas Indonesia. I have a high interest in technology especially software 
+    engineering but I also enjoy exploring other fields such as data science or 
+    game development. I have programming in several languages such as Python, 
+    Java, Godot, JS/TS, and Go.
+    `
   ],
+  resume: "https://drive.google.com/file/d/1gXceQsMJYhnV8Esws_Y_-FQCWo6RSMF2/view?usp=sharing", 
   projects: [
     {
       title: "PantauTular",
-      description: "A full-stack e-commerce application with user authentication, shopping cart functionality, and payment integration. Features responsive design and admin dashboard.",
-      tech: ["Django", "Next.js", "PSQL", "AmCharts"],
-      link: "#",
+      description: 
+      `Geospatial data visualization to analyze and monitor the spread of infectious disease in Indonesia. 
+      Collaborative project with a team of 7 and Badan Riset dan Inovasi Nasional (BRIN).`,
+      tech: ["Django", "Next.js", "PostgreSQL", "AmCharts"],
+      code: "https://github.com/orgs/PPL-BRIN/repositories",
+      demo: "https://pantautular.netlify.app/",
     },
     {
       title: "Rot In Blossom",
-      description: "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features. Built with modern web technologies.",
+      description: 
+      `A 2D roguelike game where players need to survive as long as possible in a world filled with monsters and challenges.`,
       tech: ["Godot"],
-      link: "#",
+      code: "https://github.com/yodh4/gamejam-uts",
+      demo: "https://yodh4.itch.io/rot-in-blossom",
     },
     {
       title: "Callisto",
-      description: "An intelligent chatbot using machine learning for natural language processing. Implements sentiment analysis and context-aware responses for enhanced user interaction.",
+      description: 
+      `A 2D adventure game where the player explores an underwater cave 
+      full of monsters and traps to search for his missing crewmates.`,
       tech: ["Godot"],
-      link: "#",
+      code: "https://github.com/Absolute-Cinema-GameDev/callisto-game/tree/development",
+      demo: "https://absolute-cinema.itch.io/callisto",
     },
     {
-      title: "Weather Dashboard",
-      description: "A responsive weather dashboard that displays current conditions and forecasts. Features location-based weather data and interactive charts for weather trends.",
-      tech: ["JavaScript", "Chart.js", "API", "CSS3"],
-      link: "#",
+      title: "Person Detection & Face Recognition",
+      description: `
+      A computer vision project for detects person and recognizes faces in real-time using YOLO and FaceNet models.`,
+      tech: ["Python", "Yolo", "FaceNet", "YuNet"],
+      code: "https://github.com/narendradzulqarnain/robot-uas",
+      demo: "#",
     },
   ],
   experience: [
     {
-      title: "Teaching Assistant",
-      date: "2023 - Present",
-      company: "University Computer Science Department",
-      description: "Assisted in teaching introductory programming courses (Python and Java). Conducted lab sessions, graded assignments, and provided one-on-one tutoring to students. Helped improve student pass rates by 25%.",
+      title: "Teaching Assistant of Programming Foundations 2",
+      date: "Mar 2025 - Jun 2025",
+      company: "Fakultas Ilmu Komputer, Universitas Indonesia",
+      description: 
+      `Assisted in programming foundation courses (Java). 
+      Created a programming assignment, graded assignments, and provided tutoring for 12 students. `,
     }
   ],
   contact: {
     email: "cyrilusyodha@gmail.com",
     linkedin: "https://linkedin.com/in/yourprofile",
-    github: "https://github.com/yourusername",
-    portfolio: "https://your-portfolio.com",
+    github: "https://github.com/yodh4"
   },
-  copyright: `© ${new Date().getFullYear()} Your Name. Built with passion and lots of coffee.`,
+  copyright: `© ${new Date().getFullYear()}`,
 };
 
 // --- Reusable Typed Components ---
@@ -122,6 +137,7 @@ const Navbar: FC = () => (
         <a href="#projects" className={styles.navLink}>Projects</a>
         <a href="#experience" className={styles.navLink}>Experience</a>
         <a href="#contact" className={styles.navLink}>Contact</a>
+        <a href={portfolioData.resume} className={`${styles.navLink} ${styles.cvButton}`} target="_blank" rel="noopener noreferrer">Resume</a>
       </div>
     </div>
   </nav>
@@ -171,7 +187,26 @@ const Projects: FC<ProjectsProps> = ({ projects }) => (
                                 <span key={tech} className={styles.techTag}>{tech}</span>
                             ))}
                         </div>
-                        <a href={project.link} className={styles.projectLink} target="_blank" rel="noopener noreferrer">View Project</a>
+                        <div className={styles.projectLinks}>
+                            <a href={project.code} className={styles.projectLink} target="_blank" rel="noopener noreferrer">
+                                <svg className={styles.linkIcon} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                                Code
+                            </a>
+                            {project.demo && project.demo !== "#" && (
+                                <a href={project.demo} className={styles.projectLink} target="_blank" rel="noopener noreferrer">
+                                    <Image
+                                        src="/white-internet.svg"
+                                        alt="Demo Icon"
+                                        width={16}
+                                        height={16}
+                                        className={styles.linkIcon}
+                                    />
+                                    Demo
+                                </a>
+                            )}
+                        </div>
                     </div>
                 ))}
             </div>
@@ -211,7 +246,6 @@ const Footer: FC<FooterProps> = ({ contact, copyright }) => (
         <a href={`mailto:${contact.email}`} className={styles.contactLink}>Email</a>
         <a href={contact.linkedin} className={styles.contactLink} target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href={contact.github} className={styles.contactLink} target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href={contact.portfolio} className={styles.contactLink} target="_blank" rel="noopener noreferrer">Portfolio</a>
       </div>
       <p>{copyright}</p>
     </div>
@@ -234,33 +268,6 @@ const HomePage: FC = () => {
 
     const anchors = document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]');
     anchors.forEach(anchor => anchor.addEventListener('click', handleScroll));
-
-    // Interactive hover effects for project cards
-    const projectCards = document.querySelectorAll<HTMLDivElement>(`.${styles.projectCard}`);
-    projectCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translate(-3px, -3px) scale(1.02)';
-            card.style.boxShadow = '9px 9px 0px #000';
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translate(0, 0) scale(1)';
-            card.style.boxShadow = '6px 6px 0px #000';
-        });
-    });
-
-    // Random color change for floating shapes
-    const randomizeShapeColors = () => {
-        const colors = ['#ff6b6b', '#4ecdc4', '#ffd93d', '#74b9ff', '#fd79a8', '#00b894'];
-        const shapes = document.querySelectorAll<HTMLDivElement>(`.${styles.floatingShape}`);
-        
-        shapes.forEach(shape => {
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            shape.style.backgroundColor = randomColor;
-        });
-    };
-
-    const colorInterval = setInterval(randomizeShapeColors, 10000);
     
     // Loading animation effect
     document.body.style.opacity = '0';
@@ -272,7 +279,6 @@ const HomePage: FC = () => {
     // Cleanup function
     return () => {
       anchors.forEach(anchor => anchor.removeEventListener('click', handleScroll));
-      clearInterval(colorInterval);
       clearTimeout(timer);
     };
   }, []);
