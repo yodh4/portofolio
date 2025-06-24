@@ -81,7 +81,7 @@ const portfolioData: PortfolioData = {
       title: "Person Detection & Face Recognition",
       description: `
       A computer vision project for detects person and recognizes faces in real-time using YOLO and FaceNet models.`,
-      tech: ["Python", "Yolo", "FaceNet", "YuNet"],
+      tech: ["Python", "YOLO", "FaceNet", "YuNet"],
       code: "https://github.com/narendradzulqarnain/robot-uas",
       demo: "#",
     },
@@ -98,13 +98,13 @@ const portfolioData: PortfolioData = {
   ],
   contact: {
     email: "cyrilusyodha@gmail.com",
-    linkedin: "https://linkedin.com/in/yourprofile",
+    linkedin: "https://www.linkedin.com/in/cyrilus-yodha-maheswara-b8b565371/",
     github: "https://github.com/yodh4"
   },
-  copyright: `© ${new Date().getFullYear()}`,
+  copyright: `© ${new Date().getFullYear()} Cyrilus Yodha Maheswara. All rights reserved.`,
 };
 
-// --- Reusable Typed Components ---
+// --- Reusable Typed Components ---  
 
 const FloatingShapes: FC = () => (
   <>
