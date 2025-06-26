@@ -61,12 +61,13 @@ const portfolioData: PortfolioData = {
       demo: "https://pantautular.netlify.app/",
     },
     {
-      title: "Rot In Blossom",
+      title: "Suar (WIP)",
       description: 
-      `A 2D roguelike game where players need to survive as long as possible in a world filled with monsters and challenges.`,
-      tech: ["Godot"],
-      code: "https://github.com/yodh4/gamejam-uts",
-      demo: "https://yodh4.itch.io/rot-in-blossom",
+      `A simple web based http client that allows you to send HTTP requests 
+      and view the responses in a user-friendly interface.`,
+      tech: ["Go", "Chi", "Next.js", "PostgreSQL"],
+      code: "https://github.com/orgs/suar-net/repositories",
+      demo: "#",
     },
     {
       title: "Callisto",
