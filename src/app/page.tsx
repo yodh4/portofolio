@@ -42,11 +42,11 @@ const portfolioData: PortfolioData = {
   title: "Computer Science Student",
   introduction: [
     `
-    Hello! My name is Cyrilus Yodha and I'm a final year undergraduate student at 
-    Universitas Indonesia. I have a high interest in technology especially software 
-    engineering but I also enjoy exploring other fields such as data science or 
-    game development. I have programming in several languages such as Python, 
-    Java, Godot, JS/TS, and Go.
+    Hello! My name is Cyrilus Yodha and I'm a a final-year Computer Science student at Universitas Indonesia 
+    with a core focus on software engineering. I thrive
+    on analytical challenges and am adept at designing and implementing effective solutions. My interests also extend
+    to data science and game development, constantly driving me to explore new technologies and translate complex
+    ideas into practical applications.
     `
   ],
   resume: "https://drive.google.com/file/d/1gXceQsMJYhnV8Esws_Y_-FQCWo6RSMF2/view?usp=sharing", 
@@ -59,6 +59,15 @@ const portfolioData: PortfolioData = {
       tech: ["Django", "Next.js", "PostgreSQL", "AmCharts"],
       code: "https://github.com/orgs/PPL-BRIN/repositories",
       demo: "https://pantautular.netlify.app/",
+    },
+    {
+      title: "Emart",
+      description: 
+      `An e-commerce application made with microservice architecture and using REST API for communicating
+      between each service`,
+      tech: ["Spring Boot", "Next.js", "PostgreSQL", "Docker"],
+      code: "https://github.com/A14-EMart",
+      demo: "#",
     },
     {
       title: "Suar (WIP)",
@@ -98,7 +107,7 @@ const portfolioData: PortfolioData = {
     }
   ],
   contact: {
-    email: "cyrilusyodha@gmail.com",
+    email: "cyrilus2004@gmail.com",
     linkedin: "https://www.linkedin.com/in/cyrilus-yodha-maheswara-b8b565371/",
     github: "https://github.com/yodh4"
   },
