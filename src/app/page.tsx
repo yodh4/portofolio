@@ -308,11 +308,13 @@ export default function Portfolio() {
                               <Github className="h-4 w-4" />
                             </a>
                           </Button>
-                          <Button variant="ghost" size="icon" asChild>
-                            <a href={project.demo} aria-label="Live Demo">
-                              <ExternalLink className="h-4 w-4" />
-                            </a>
-                          </Button>
+                          {project.demo !== "#" && (
+                            <Button variant="ghost" size="icon" asChild>
+                              <a href={project.demo} aria-label="Live Demo">
+                                <ExternalLink className="h-4 w-4" />
+                              </a>
+                            </Button>
+                          )}
                         </div>
                       </CardTitle>
                       <CardDescription>{project.description}</CardDescription>
@@ -358,11 +360,13 @@ export default function Portfolio() {
                               <Github className="h-4 w-4" />
                             </a>
                           </Button>
+                          {project.demo !== "#" && (
                           <Button variant="ghost" size="icon" asChild>
                             <a href={project.demo} aria-label="Live Demo">
                               <ExternalLink className="h-4 w-4" />
                             </a>
                           </Button>
+                          )}
                         </div>
                       </CardTitle>
                       <CardDescription>{project.description}</CardDescription>
