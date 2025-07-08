@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Github, Linkedin, Mail, ExternalLink, Code, Database, Globe, Server } from "lucide-react"
+import { Github, Linkedin, Mail, ExternalLink, Code, Globe, Server } from "lucide-react"
 import Image from "next/image"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
@@ -135,7 +135,7 @@ export default function Portfolio() {
           <div className="space-y-4">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-                Hi, I'm <span className="text-primary">Cyrilus Yodha</span>
+                Hi, I&apos;m <span className="text-primary">Cyrilus Yodha</span>
               </h1>
               <p className="text-xl text-muted-foreground">Computer Science Student & Software Engineer</p>
             </div>
@@ -189,7 +189,7 @@ export default function Portfolio() {
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">About Me</h2>
           <p className="text-muted-foreground md:text-lg mb-8">
-            I'm a a final-year Computer Science student at Universitas Indonesia 
+            I&apos;m a a final-year Computer Science student at Universitas Indonesia 
             with a core focus on software engineering. I thrive on analytical challenges 
             and am adept at designing and implementing effective solutions. My interests 
             also extend to data science and game development, constantly driving me to 
@@ -389,7 +389,7 @@ export default function Portfolio() {
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">Get In Touch</h2>
           <p className="text-muted-foreground md:text-lg mb-8">
-            I'm always interested in new opportunities and collaborations. Feel free to reach out if you'd like to
+            I&apos;m always interested in new opportunities and collaborations. Feel free to reach out if you&apos;d like to
             discuss projects, internships, or just connect!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -429,3 +429,4 @@ export default function Portfolio() {
     </div>
   )
 }
+
