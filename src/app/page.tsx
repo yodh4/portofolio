@@ -1,314 +1,431 @@
-'use client';
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Github, Linkedin, Mail, ExternalLink, Code, Database, Globe, Server } from "lucide-react"
+import Image from "next/image"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-import Image from 'next/image';
-import { useEffect, FC } from 'react';
-import styles from '../../styles/HomePage.module.css';
-
-// --- TypeScript Interfaces for Data Structures ---
-interface Project {
-  title: string;
-  description: string;
-  tech: string[];
-  code: string;
-  demo: string;
-}
-
-interface ExperienceItem {
-  title: string;
-  date: string;
-  company: string;
-  description: string;
-}
-
-interface Contact {
-  email: string;
-  linkedin: string;
-  github: string;
-}
-
-interface PortfolioData {
-  name: string;
-  title: string;
-  introduction: string[];
-  projects: Project[];
-  experience: ExperienceItem[];
-  contact: Contact;
-  copyright: string;
-  resume: string;
-}
-
-const portfolioData: PortfolioData = {
-  name: "Cyrilus Yodha Maheswara",
-  title: "Computer Science Student",
-  introduction: [
-    `
-    Hello! My name is Cyrilus Yodha and I'm a a final-year Computer Science student at Universitas Indonesia 
-    with a core focus on software engineering. I thrive
-    on analytical challenges and am adept at designing and implementing effective solutions. My interests also extend
-    to data science and game development, constantly driving me to explore new technologies and translate complex
-    ideas into practical applications.
-    `
-  ],
-  resume: "https://drive.google.com/file/d/1gXceQsMJYhnV8Esws_Y_-FQCWo6RSMF2/view?usp=sharing", 
-  projects: [
+export default function Portfolio() {
+  const softwareProjects = [
     {
       title: "PantauTular",
-      description: 
-      `Geospatial data visualization to analyze and monitor the spread of infectious disease in Indonesia. 
-      Collaborative project with a team of 7 and Badan Riset dan Inovasi Nasional (BRIN).`,
-      tech: ["Django", "Next.js", "PostgreSQL", "AmCharts"],
-      code: "https://github.com/orgs/PPL-BRIN/repositories",
+      description:
+        `Geospatial data visualization to analyze and monitor the spread of infectious disease in Indonesia. 
+        Collaborative project with a team of 7 and Badan Riset dan Inovasi Nasional (BRIN)`,
+      technologies: ["Django", "Next.js", "PostgreSQL", "AmCharts"],
+      github: "https://github.com/orgs/PPL-BRIN/repositories",
       demo: "https://pantautular.netlify.app/",
-    },
-    {
-      title: "Emart",
-      description: 
-      `An e-commerce application made with microservice architecture and using REST API for communicating
-      between each service`,
-      tech: ["Spring Boot", "Next.js", "PostgreSQL", "Docker"],
-      code: "https://github.com/A14-EMart",
-      demo: "#",
+      image: "/pantau-tular.png?height=400&width=400",
     },
     {
       title: "Suar (WIP)",
-      description: 
-      `A simple web based http client that allows you to send HTTP requests 
-      and view the responses in a user-friendly interface.`,
-      tech: ["Go", "Chi", "Next.js", "PostgreSQL"],
-      code: "https://github.com/orgs/suar-net/repositories",
+      description:
+        `A simple web based http client that allows you to send HTTP requests and view the responses in a user-friendly interface.`,
+      technologies: ["Chi", "Next.js", "PostgreSQL", "Docker"],
+      github: "https://github.com/orgs/suar-net/repositories",
       demo: "#",
+      image: "/placeholder.jpg?height=200&width=400",
+    },
+    {
+      title: "EMart",
+      description:
+        "E-commerce application made with microservice architecture and using REST API for communicating between each service",
+      technologies: ["Spring Boot", "Next.js", "PostgreSQL"],
+      github: "https://github.com/orgs/A14-EMart/repositories",
+      demo: "#",
+      image: "/placeholder.jpg?height=200&width=400",
+    },
+    {
+      title: "Marmut",
+      description:
+        "Online music & podcast streaming service mockup web application for Databases course. Uses raw SQL queries instead of ORM.",
+      technologies: ["Django", "PostgreSQL"],
+      github: "https://github.com/Saras355/basdat_proyek_tk",
+      demo: "#",
+      image: "/marmut.png?height=200&width=400",
+    },
+    {
+      title: "Bookly",
+      description:
+        "Book catalog application for Platform Based Programming course.",
+      technologies: ["Django"],
+      github: "https://github.com/pbp-f11/bookly",
+      demo: "#",
+      image: "/placeholder.jpg?height=200&width=400",
+    },
+    {
+      title: "Bookly (Mobile)",
+      description:
+        "Book catalog application for Platform Based Programming course.",
+      technologies: ["Flutter"],
+      github: "https://github.com/pbp-f11/bookly_mobile",
+      demo: "#",
+      image: "/placeholder.jpg?height=200&width=400",
+    },
+  ]
+
+  const otherProjects = [
+    {
+      title: "Rot In Blossom",
+      description: "Retro-style top-down 2D roguelike game where you play as a teenager trapped in a park. Kill all the monsters in this park to survive and let's see how long you can survive",
+      technologies: ["Godot"],
+      github: "https://github.com/yodh4/gamejam-uts",
+      demo: "https://yodh4.itch.io/rot-in-blossom",
+      image: "/rot-in-blossom.png?height=200&width=400",
     },
     {
       title: "Callisto",
-      description: 
-      `A 2D adventure game where the player explores an underwater cave 
-      full of monsters and traps to search for his missing crewmates.`,
-      tech: ["Godot"],
-      code: "https://github.com/Absolute-Cinema-GameDev/callisto-game/tree/development",
+      description: "2D adventure game where the player have to explore an underwater cave full of monsters and traps to search for his missing crewmates.",
+      technologies: ["Godot"],
+      github: "https://github.com/Absolute-Cinema-GameDev/callisto-game",
       demo: "https://absolute-cinema.itch.io/callisto",
+      image: "/callisto.png?height=200&width=400",
     },
     {
       title: "Person Detection & Face Recognition",
-      description: `
-      A computer vision project for detects person and recognizes faces in real-time using YOLO and FaceNet models.`,
-      tech: ["Python", "YOLO", "FaceNet", "YuNet"],
-      code: "https://github.com/narendradzulqarnain/robot-uas",
+      description: "A computer vision project for detects person and recognizes faces in real-time using YOLO and FaceNet models.",
+      technologies: ["Python", "YOLO", "FaceNet", "YuNet"],
+      github: "https://github.com/narendradzulqarnain/robot-uas",
       demo: "#",
+      image: "/placeholder.jpg?height=200&width=400",
     },
-  ],
-  experience: [
-    {
-      title: "Teaching Assistant of Programming Foundations 2",
-      date: "Mar 2025 - Jun 2025",
-      company: "Fakultas Ilmu Komputer, Universitas Indonesia",
-      description: 
-      `Assisted in programming foundation courses (Java). 
-      Created a programming assignment, graded assignments, and provided tutoring for 12 students. `,
-    }
-  ],
-  contact: {
-    email: "cyrilus2004@gmail.com",
-    linkedin: "https://www.linkedin.com/in/cyrilus-yodha-maheswara-b8b565371/",
-    github: "https://github.com/yodh4"
-  },
-  copyright: `© ${new Date().getFullYear()} Cyrilus Yodha Maheswara. All rights reserved.`,
-};
+  ]
 
-// --- Reusable Typed Components ---  
-
-const FloatingShapes: FC = () => (
-  <>
-    <div className={`${styles.floatingShape} ${styles.shape1}`}></div>
-    <div className={`${styles.floatingShape} ${styles.shape2}`}></div>
-    <div className={`${styles.floatingShape} ${styles.shape3}`}></div>
-  </>
-);
-
-interface HeaderProps {
-  name: string;
-  title: string;
-}
-const Header: FC<HeaderProps> = ({ name, title }) => (
-  <header className={styles.header}>
-    <div className={styles.container}>
-      <div className={styles.headerContent}>
-        <h1>{name}</h1>
-        <div className={styles.subtitle}>{title}</div>
-      </div>
-    </div>
-  </header>
-);
-
-const Navbar: FC = () => (
-  <nav className={styles.nav}>
-    <div className={styles.container}>
-      <div className={styles.navLinks}>
-        <a href="#intro" className={styles.navLink}>About</a>
-        <a href="#projects" className={styles.navLink}>Projects</a>
-        <a href="#experience" className={styles.navLink}>Experience</a>
-        <a href="#contact" className={styles.navLink}>Contact</a>
-        <a href={portfolioData.resume} className={`${styles.navLink} ${styles.cvButton}`} target="_blank" rel="noopener noreferrer">Resume</a>
-      </div>
-    </div>
-  </nav>
-);
-
-interface IntroductionProps {
-  paragraphs: string[];
-  imageSrc: string;
-}
-const Introduction: FC<IntroductionProps> = ({ paragraphs, imageSrc }) => (
-  <section id="intro" className={`${styles.section} ${styles.intro}`}>
-    <div className={styles.container}>
-      <h2 className={styles.sectionTitle}>Introduction</h2>
-      <div className={styles.introContent}>
-        <div className={styles.introText}>
-          {paragraphs.map((p, index) => <p key={index}>{p}</p>)}
-        </div>
-        <div className={styles.introImageWrapper}>
-            <Image
-                src={imageSrc}
-                alt="Your Photo"
-                width={250}
-                height={250}
-                className={styles.introImage}
-                priority
-            />
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-interface ProjectsProps {
-  projects: Project[];
-}
-const Projects: FC<ProjectsProps> = ({ projects }) => (
-    <section id="projects" className={`${styles.section} ${styles.projects}`}>
-        <div className={styles.container}>
-            <h2 className={styles.sectionTitle}>Projects</h2>
-            <div className={styles.projectsGrid}>
-                {projects.map((project) => (
-                    <div key={project.title} className={styles.projectCard}>
-                        <h3 className={styles.projectTitle}>{project.title}</h3>
-                        <p className={styles.projectDescription}>{project.description}</p>
-                        <div className={styles.projectTech}>
-                            {project.tech.map((tech) => (
-                                <span key={tech} className={styles.techTag}>{tech}</span>
-                            ))}
-                        </div>
-                        <div className={styles.projectLinks}>
-                            <a href={project.code} className={styles.projectLink} target="_blank" rel="noopener noreferrer">
-                                <svg className={styles.linkIcon} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                                </svg>
-                                Code
-                            </a>
-                            {project.demo && project.demo !== "#" && (
-                                <a href={project.demo} className={styles.projectLink} target="_blank" rel="noopener noreferrer">
-                                    <Image
-                                        src="/white-internet.svg"
-                                        alt="Demo Icon"
-                                        width={16}
-                                        height={16}
-                                        className={styles.linkIcon}
-                                    />
-                                    Demo
-                                </a>
-                            )}
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </div>
-    </section>
-);
-
-interface ExperienceProps {
-  experience: ExperienceItem[];
-}
-const Experience: FC<ExperienceProps> = ({ experience }) => (
-    <section id="experience" className={`${styles.section} ${styles.experience}`}>
-        <div className={styles.container}>
-            <h2 className={styles.sectionTitle}>Experience</h2>
-            {experience.map((item) => (
-                <div key={item.title} className={styles.experienceItem}>
-                    <div className={styles.experienceHeader}>
-                        <h3 className={styles.experienceTitle}>{item.title}</h3>
-                        <div className={styles.experienceDate}>{item.date}</div>
-                    </div>
-                    <div className={styles.experienceCompany}>{item.company}</div>
-                    <p>{item.description}</p>
-                </div>
-            ))}
-        </div>
-    </section>
-);
-
-interface FooterProps {
-  contact: Contact;
-  copyright: string;
-}
-const Footer: FC<FooterProps> = ({ contact, copyright }) => (
-  <footer id="contact" className={styles.footer}>
-    <div className={styles.container}>
-      <div className={styles.contactLinks}>
-        <a href={`mailto:${contact.email}`} className={styles.contactLink}>Email</a>
-        <a href={contact.linkedin} className={styles.contactLink} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href={contact.github} className={styles.contactLink} target="_blank" rel="noopener noreferrer">GitHub</a>
-      </div>
-      <p>{copyright}</p>
-    </div>
-  </footer>
-);
-
-// --- Main Page Component ---
-const HomePage: FC = () => {
-  
-  useEffect(() => {
-    // Smooth scrolling for navigation links
-    const handleScroll = (e: Event) => {
-        e.preventDefault();
-        const targetId = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
-        const targetElement = targetId ? document.querySelector(targetId) : null;
-        if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    };
-
-    const anchors = document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]');
-    anchors.forEach(anchor => anchor.addEventListener('click', handleScroll));
-    
-    // Loading animation effect
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.5s ease-in-out';
-    const timer = setTimeout(() => {
-        document.body.style.opacity = '1';
-    }, 100);
-
-    // Cleanup function
-    return () => {
-      anchors.forEach(anchor => anchor.removeEventListener('click', handleScroll));
-      clearTimeout(timer);
-    };
-  }, []);
+  const skills = [
+    { category: "Languages", items: ["JavaScript", "Python", "Java", "Go", "TypeScript", "Godot"] },
+    { category: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "HTML/CSS"] },
+    { category: "Backend", items: ["Chi", "Spring Boot", "Django", "FastAPI"] },
+    { category: "Database", items: ["PostgreSQL",  "MySQL"] },
+    { category: "Tools", items: ["Git", "Docker"] },
+  ]
 
   return (
-    <>
-      <FloatingShapes />
-      
-      <div className={styles.pageWrapper}>
-        <Header name={portfolioData.name} title={portfolioData.title} />
-        <Navbar />
-        <main>
-          <Introduction paragraphs={portfolioData.introduction} imageSrc="/muka-yodha.jpg" />
-          <Projects projects={portfolioData.projects} />
-          <Experience experience={portfolioData.experience} />
-        </main>
-        <Footer contact={portfolioData.contact} copyright={portfolioData.copyright} />
-      </div>
-    </>
-  );
-}
+    <div className="min-h-screen bg-background">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-14 items-center border-x px-6">
+          <div className="mr-4 flex">
+            <a className="mr-6 flex items-center space-x-2" href="#home">
+              <Code className="h-6 w-6" />
+              <span className="font-bold">Portfolio</span>
+            </a>
+          </div>
+          <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+            <nav className="flex items-center space-x-6 text-sm font-medium">
+              <a href="#about" className="transition-colors hover:text-foreground/80">
+                About
+              </a>
+              <a href="#skills" className="transition-colors hover:text-foreground/80">
+                Skills
+              </a>
+              <a href="#projects" className="transition-colors hover:text-foreground/80">
+                Projects
+              </a>
+              <a href="#contact" className="transition-colors hover:text-foreground/80">
+                Contact
+              </a>
+            </nav>
+          </div>
+        </div>
+      </nav>
 
-export default HomePage;
+      {/* Hero Section */}
+      <section id="home" className="container flex min-h-[calc(100vh-3.5rem)] items-center py-12 border-x px-6">
+        <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
+                Hi, I'm <span className="text-primary">Cyrilus Yodha</span>
+              </h1>
+              <p className="text-xl text-muted-foreground">Computer Science Student & Software Engineer</p>
+            </div>
+            <p className="max-w-[600px] text-muted-foreground md:text-lg">
+              Passionate about building scalable software solutions and exploring cutting-edge technologies. Currently
+              pursuing my degree in Computer Science with a focus on software engineering and full-stack development.
+            </p>
+            <div className="flex flex-col gap-2 min-[400px]:flex-row">
+              <Button size="lg" asChild>
+                <a href="#projects">View My Work</a>
+              </Button>
+              <Button variant="outline" size="lg" asChild>
+                <a href="#contact">Get In Touch</a>
+              </Button>
+            </div>
+            <div className="flex items-center space-x-4 pt-4">
+              <Button variant="ghost" size="icon" asChild>
+                <a href="#" aria-label="GitHub">
+                  <Github className="h-5 w-5" />
+                </a>
+              </Button>
+              <Button variant="ghost" size="icon" asChild>
+                <a href="#" aria-label="LinkedIn">
+                  <Linkedin className="h-5 w-5" />
+                </a>
+              </Button>
+              <Button variant="ghost" size="icon" asChild>
+                <a href="#" aria-label="Email">
+                  <Mail className="h-5 w-5" />
+                </a>
+              </Button>
+            </div>
+          </div>
+          <div className="flex justify-center">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full blur-3xl"></div>
+              <Image
+                src="/muka-yodha.jpg"
+                alt="Profile"
+                width={400}
+                height={400}
+                className="relative rounded-full border-4 border-border"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="container py-12 md:py-24">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">About Me</h2>
+          <p className="text-muted-foreground md:text-lg mb-8">
+            I'm a a final-year Computer Science student at Universitas Indonesia 
+            with a core focus on software engineering. I thrive on analytical challenges 
+            and am adept at designing and implementing effective solutions. My interests 
+            also extend to data science and game development, constantly driving me to 
+            explore new technologies and translate complex ideas into practical applications.
+          </p>
+          <div className="grid gap-6 md:grid-cols-3">
+            <Card>
+              <CardHeader>
+                <Code className="h-8 w-8 mb-2 text-primary" />
+                <CardTitle>Software Engineering</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Building robust, scalable applications with modern frameworks and best practices.
+                </p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <Globe className="h-8 w-8 mb-2 text-primary" />
+                <CardTitle>Full-Stack Development</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  End-to-end development from frontend interfaces to backend services and deployment.
+                </p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <Server className="h-8 w-8 mb-2 text-primary" />
+                <CardTitle>DevOps</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Automating deployment pipelines, managing infrastructure, and ensuring system reliability.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="container py-12 md:py-24 bg-muted/50">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12">
+            Skills & Technologies
+          </h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {skills.map((skillGroup, index) => (
+              <Card key={index}>
+                <CardHeader>
+                  <CardTitle className="text-lg">{skillGroup.category}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-2">
+                    {skillGroup.items.map((skill, skillIndex) => (
+                      <Badge key={skillIndex} variant="secondary">
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section with Tabs */}
+      <section id="projects" className="container py-12 md:py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">My Projects</h2>
+            <p className="text-muted-foreground md:text-lg max-w-2xl mx-auto">
+              Explore my work across different areas of computer science and software development.
+            </p>
+          </div>
+
+          <Tabs defaultValue="software" className="w-full">
+            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
+              <TabsTrigger value="software" className="text-sm">
+                Software Engineering
+              </TabsTrigger>
+              <TabsTrigger value="other" className="text-sm">
+                Other Projects
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="software" className="space-y-6">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold mb-2">Software Engineering Projects</h3>
+                <p className="text-muted-foreground">
+                  Full-stack applications and software systems showcasing my expertise in software engineering
+                  principles.
+                </p>
+              </div>
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {softwareProjects.map((project, index) => (
+                  <Card key={index} className="overflow-hidden">
+                    <div className="aspect-video relative overflow-hidden">
+                      <Image
+                        src={project.image || "/placeholder.svg"}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform hover:scale-105"
+                      />
+                    </div>
+                    <CardHeader>
+                      <CardTitle className="flex items-center justify-between">
+                        {project.title}
+                        <div className="flex space-x-2">
+                          <Button variant="ghost" size="icon" asChild>
+                            <a href={project.github} aria-label="GitHub">
+                              <Github className="h-4 w-4" />
+                            </a>
+                          </Button>
+                          <Button variant="ghost" size="icon" asChild>
+                            <a href={project.demo} aria-label="Live Demo">
+                              <ExternalLink className="h-4 w-4" />
+                            </a>
+                          </Button>
+                        </div>
+                      </CardTitle>
+                      <CardDescription>{project.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-wrap gap-1">
+                        {project.technologies.map((tech, techIndex) => (
+                          <Badge key={techIndex} variant="outline" className="text-xs">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="other" className="space-y-6">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold mb-2">Other Projects</h3>
+                <p className="text-muted-foreground">
+                  Diverse projects exploring data science, robotic, and game development.
+                </p>
+              </div>
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {otherProjects.map((project, index) => (
+                  <Card key={index} className="overflow-hidden">
+                    <div className="aspect-video relative overflow-hidden">
+                      <Image
+                        src={project.image || "/placeholder.svg"}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform hover:scale-105"
+                      />
+                    </div>
+                    <CardHeader>
+                      <CardTitle className="flex items-center justify-between">
+                        {project.title}
+                        <div className="flex space-x-2">
+                          <Button variant="ghost" size="icon" asChild>
+                            <a href={project.github} aria-label="GitHub">
+                              <Github className="h-4 w-4" />
+                            </a>
+                          </Button>
+                          <Button variant="ghost" size="icon" asChild>
+                            <a href={project.demo} aria-label="Live Demo">
+                              <ExternalLink className="h-4 w-4" />
+                            </a>
+                          </Button>
+                        </div>
+                      </CardTitle>
+                      <CardDescription>{project.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-wrap gap-1">
+                        {project.technologies.map((tech, techIndex) => (
+                          <Badge key={techIndex} variant="outline" className="text-xs">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="container py-12 md:py-24">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">Get In Touch</h2>
+          <p className="text-muted-foreground md:text-lg mb-8">
+            I'm always interested in new opportunities and collaborations. Feel free to reach out if you'd like to
+            discuss projects, internships, or just connect!
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" asChild>
+              <a href="mailto:cyrilus2004@gmail.com">
+                <Mail className="mr-2 h-4 w-4" />
+                Send Email
+              </a>
+            </Button>
+            <Button variant="outline" size="lg" asChild>
+              <a href="https://www.linkedin.com/in/cyrilus-yodha-maheswara-b8b565371/">
+                <Linkedin className="mr-2 h-4 w-4" />
+                LinkedIn
+              </a>
+            </Button>
+            <Button variant="outline" size="lg" asChild>
+              <a href="https://github.com/yodh4">
+                <Github className="mr-2 h-4 w-4" />
+                GitHub
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t py-6 md:py-0">
+        <div className="container flex flex-col items-center justify-center gap-4 md:h-24 md:flex-row">
+          <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
+            <Code className="h-6 w-6" />
+            <p className="text-center text-sm leading-loose text-muted-foreground">
+              © Cyrilus Yodha Maheswara 2025. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
+}
