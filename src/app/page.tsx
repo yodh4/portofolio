@@ -21,10 +21,19 @@ export default function Portfolio() {
       title: "Suar",
       description:
         `A simple web based http client that allows you to send HTTP requests and view the responses in a user-friendly interface.`,
-      technologies: ["GO", "Chi", "Vue", "PostgreSQL", "Docker"],
+      technologies: ["Go", "Chi", "Vue", "PostgreSQL", "Docker"],
       github: "https://github.com/orgs/suar-net/repositories",
       demo: "https://suar.vercel.app/",
       image: "/suar.png?height=200&width=400",
+    },
+    {
+      title: "InaGo",
+      description:
+        `Hackathon project for GarudaHack, a web application to connect the community of cultural activists and  volunteers with people who want to learn and explore Indonesia more deeply`,
+      technologies: ["React", "Hono", "Effect", "PostgreSQL", "Docker"],
+      github: "https://github.com/orgs/Funtastic-4/repositories",
+      demo: "https://devpost.com/software/inago",
+      image: "/inago.png?height=200&width=400",
     },
     {
       title: "EMart",
@@ -96,7 +105,7 @@ export default function Portfolio() {
     { category: "Frontend", items: ["React", "Next.js", "Vue", "Tailwind CSS", "HTML/CSS"] },
     { category: "Backend", items: ["Chi", "Spring Boot", "Django", "FastAPI"] },
     { category: "Database", items: ["PostgreSQL",  "MySQL"] },
-    { category: "Tools", items: ["Git", "Docker"] },
+    { category: "Tools", items: ["Git", "Docker", "K6", "Prometheus", "Grafana"] },
   ]
 
   return (
