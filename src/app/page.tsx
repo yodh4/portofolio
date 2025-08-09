@@ -12,19 +12,19 @@ export default function Portfolio() {
       description:
         `Geospatial data visualization to analyze and monitor the spread of infectious disease in Indonesia. 
         Collaborative project with a team of 7 and Badan Riset dan Inovasi Nasional (BRIN)`,
-      technologies: ["Django", "Next.js", "PostgreSQL", "AmCharts"],
+      technologies: ["Django", "Next.js", "PostgreSQL", "AmCharts", "K6", "Prometheus", "Grafana"],
       github: "https://github.com/orgs/PPL-BRIN/repositories",
       demo: "https://pantautular.netlify.app/",
       image: "/pantau-tular.png?height=400&width=400",
     },
     {
-      title: "Suar (WIP)",
+      title: "Suar",
       description:
         `A simple web based http client that allows you to send HTTP requests and view the responses in a user-friendly interface.`,
-      technologies: ["Chi", "Next.js", "PostgreSQL", "Docker"],
+      technologies: ["GO", "Chi", "Vue", "PostgreSQL", "Docker"],
       github: "https://github.com/orgs/suar-net/repositories",
-      demo: "#",
-      image: "/placeholder.jpg?height=200&width=400",
+      demo: "https://suar.vercel.app/",
+      image: "/suar.png?height=200&width=400",
     },
     {
       title: "EMart",
@@ -107,7 +107,7 @@ export default function Portfolio() {
           <div className="mr-4 flex">
             <a className="mr-6 flex items-center space-x-2" href="#home">
               <Code className="h-6 w-6" />
-              <span className="font-bold">Portfolio</span>
+              <span className="font-bold">Cyrilus Yodha M</span>
             </a>
           </div>
           <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
